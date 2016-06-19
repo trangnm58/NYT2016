@@ -15,6 +15,9 @@ class Class {
 		Class();
 		Class(int id, string name, string year);
 
+		string getName() const { return name; }
+		string getYear() const { return year; }
+
 		void printInfo();
 		void printDetailInfo();
 		void printStudentInfo(int studentId);

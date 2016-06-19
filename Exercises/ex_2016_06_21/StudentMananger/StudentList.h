@@ -1,12 +1,10 @@
-// Data structures: Template class List
-// Header file
-
 #ifndef STUDENT_LIST_H
 #define STUDENT_LIST_H
 
 template <class Student>
 class StudentListIterator;
 
+// Data structures: Template class StudentList
 template <class Student>
 class StudentList
 {
@@ -30,9 +28,8 @@ class StudentList
 		int size;
 };
 
-// Data structures: Template class StudentListIterator
-// Header file
 
+// Data structures: Template class StudentListIterator
 template <class Student>
 class StudentListIterator
 {

@@ -20,8 +20,6 @@ int main() {
 	int* numbers;
 	int count = 0;
 	int min, max, mostFreq, freq;
-	int* ascNumbers;
-	int* descNumbers;
 	
 	// get 10 numbers from user
 	cout << "Number of numbers: ";

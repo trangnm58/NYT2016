@@ -1,14 +1,18 @@
 /**
  * Nguyen Minh Trang
- * 2016/06/18
+ * 2016/06/19
  * Project: Student Manager
  */
+
+#include<fstream>
 
 #include "Class.h"
 #include "ClassList.h"
 
 
 /*--------- FUNCTIONS DECLARATIONS -----------*/
+void readFromDatabase(ClassList<Class> &list, string fileName);
+void saveToDatabase(ClassList<Class> &list, string fileName);
 void insertNewClass(ClassList<Class> &list);
 void insertNewStudent(ClassList<Class> &list);
 void insertStudentMarks(ClassList<Class> &list);
@@ -20,6 +24,9 @@ void printStudentInfo(ClassList<Class> &list);
 int main() {
 	ClassList<Class> list;
 	int choice;
+
+	// read data from file
+	readFromDatabase(list, "database.txt");
 
 	while (true) {
 		cout << "Choose:" << endl;
@@ -51,6 +58,8 @@ int main() {
 			// print a specific student's info
 			printStudentInfo(list);
 		} else if (choice == 7) {
+			// save data to file
+			saveToDatabase(list, "database.txt");		
 			break;
 		}
 	}
@@ -59,6 +68,94 @@ int main() {
 
 
 /*--------- FUNCTIONS DEFINITIONS -----------*/
+void readFromDatabase(ClassList<Class> &list, string fileName) {
+	ifstream inStream;
+	inStream.open(fileName.c_str());
+	
+	int numOfClasses;
+	inStream >> numOfClasses;
+	
+	for (int i=0; i < numOfClasses; i++) {
+		string name, year;
+		string temp;  // placeholder for endline, to clear ifstream for getline()
+		
+		inStream.ignore(INT_MAX, '\n');
+		getline(inStream, name);
+
+		inStream >> year;
+
+		Class c(i + 1, name, year);
+		list.append(c);
+		
+		// read students data in the class
+		int numOfStudents;
+		
+		inStream >> numOfStudents;
+		
+		for (int j=0; j < numOfStudents; j++) {
+			string name, birthday;
+			int testMark1, testMark2, examMark1, examMark2;
+
+			inStream.ignore(INT_MAX, '\n');
+			getline(inStream, name);
+			
+			inStream >> birthday;
+			
+			Student s(j + 1, name, birthday, i + 1);
+			list.element(i).list.append(s);
+			
+			// read student's marks
+			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
+			list.element(i).list.element(j).setMathMarks(testMark1, testMark2, examMark1, examMark2);
+			
+			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
+			list.element(i).list.element(j).setPhysicsMarks(testMark1, testMark2, examMark1, examMark2);
+			
+			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
+			list.element(i).list.element(j).setChemistryMarks(testMark1, testMark2, examMark1, examMark2);
+		}
+	}
+	
+	inStream.close();
+}
+
+void saveToDatabase(ClassList<Class> &list, string fileName) {
+	ofstream outStream;
+	outStream.open(fileName.c_str());
+	
+	int numOfClasses = list.length();
+	outStream << numOfClasses << endl;
+	
+	for (int i=0; i < numOfClasses; i++) {
+		outStream << list.element(i).getName() << endl;
+		outStream << list.element(i).getYear() << endl;
+		
+		int numOfStudents = list.element(i).list.length();
+		outStream << numOfStudents << endl;
+		for (int j=0; j < numOfStudents; j++) {
+			outStream << list.element(i).list.element(j).getName() << endl;
+			outStream << list.element(i).list.element(j).getBirthday() << endl;
+			
+			outStream << list.element(i).list.element(j).getMathMarks().testMark1 << " ";
+			outStream << list.element(i).list.element(j).getMathMarks().testMark2 << " ";
+			outStream << list.element(i).list.element(j).getMathMarks().examMark1 << " ";
+			outStream << list.element(i).list.element(j).getMathMarks().examMark2 << endl;
+			
+			outStream << list.element(i).list.element(j).getPhysicsMarks().testMark1 << " ";
+			outStream << list.element(i).list.element(j).getPhysicsMarks().testMark2 << " ";
+			outStream << list.element(i).list.element(j).getPhysicsMarks().examMark1 << " ";
+			outStream << list.element(i).list.element(j).getPhysicsMarks().examMark2 << endl;
+			
+			outStream << list.element(i).list.element(j).getChemistryMarks().testMark1 << " ";
+			outStream << list.element(i).list.element(j).getChemistryMarks().testMark2 << " ";
+			outStream << list.element(i).list.element(j).getChemistryMarks().examMark1 << " ";
+			outStream << list.element(i).list.element(j).getChemistryMarks().examMark2 << endl;
+		}
+	}
+	
+	outStream.close();
+}
+
 void insertNewClass(ClassList<Class> &list) {
 	int numOfClasses;
 
@@ -70,18 +167,18 @@ void insertNewClass(ClassList<Class> &list) {
 		for (int i = 0; i < numOfClasses; i++) {
 			char name[30];
 			string year;
-			
+
 			cout << "Class " << i + 1 << endl;
 			// get name
 			cout << "\tName: ";
 			cin.clear();
 			fflush(stdin);
 			cin.getline(name, 30);
-	
+
 			// get birthday
 			cout << "\tYear: ";
 			cin >> year;
-			
+
 			Class c(i + 1, name, year);
 			list.append(c);
 		}

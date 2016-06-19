@@ -11,6 +11,7 @@
 using namespace std;
 
 
+/*--------- CONSTANTS ----------*/
 const int NUMBERS_LENGTH = 10;
 
 
@@ -49,8 +50,9 @@ void generateNumbers(int count, string fileName) {
 	ofstream outStream;
 	outStream.open(fileName.c_str());
 
-	for (int i = 0; i < count; i++) {
-		outStream << float(rand() % 100) / float(rand() % 100) << " ";
+	for (int i=0; i < count; i++) {
+		// generate real numbers from 0 to 100
+		outStream << float(rand() % 100) / (float(rand() % 100) + 1) << " ";
 	}
 	
 	outStream.close();
@@ -63,6 +65,8 @@ void readNumbersFromFile(float* numbers, int count, string fileName) {
 	for (int i=0; i < count; i++) {
 		inStream >> numbers[i];
 	}
+	
+	inStream.close();
 }
 
 float sumOfSquares(float* numbers, int count) {
