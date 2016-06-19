@@ -12,18 +12,16 @@ class Student {
 		Student(int id, string name, string birthday);
 
 		void setMarks(int winMark, int wordMark, int jiraMark);
-		int getSum() const;
-		string getRank() const;
 		void printInfo();
-
-		string name;
-		string birthday;
-		int winMark;
-		int wordMark;
-		int jiraMark;
 
 	private:
 		int id;
+		string name;
+		string birthday;
+		
+		int winMark;
+		int wordMark;
+		int jiraMark;
 		int sum;
 		string rank;
 };

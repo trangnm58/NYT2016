@@ -56,6 +56,7 @@ void printList(List<Student> list) {
 	for (int i = 0; i < list.length(); i++) {
 		list.element(i).printInfo();
 	}
+	cout << endl;
 }
 
 void insertStudentsInfo(List<Student> &list) {
@@ -72,13 +73,13 @@ void insertStudentsInfo(List<Student> &list) {
 			
 			cout << "Student " << i + 1 << endl;
 			// get name
-			cout << "Name: ";
+			cout << "\tName: ";
 			cin.clear();
 			fflush(stdin);
 			cin.getline(name, 30);
 	
 			// get birthday
-			cout << "Birthday: ";
+			cout << "\tBirthday: ";
 			cin >> birthday;
 			
 			Student s(i + 1, name, birthday);

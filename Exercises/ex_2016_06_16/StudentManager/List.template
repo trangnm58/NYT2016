@@ -1,11 +1,10 @@
-// Data structures: Template class List
-// Setup file
-
 #include <iostream>
 #include <assert.h>
 
 using namespace std;
 
+
+// Data structures: Template class List
 template <class Student>
 List<Student>::List()
 {
@@ -121,9 +120,8 @@ void List<Student>::print()
 	}
 }
 
-// Data structures: Template class ListIterator
-// Setup file
 
+// Data structures: Template class ListIterator
 template <class Student>
 ListIterator<Student>::ListIterator(List<Student>& L)
 {

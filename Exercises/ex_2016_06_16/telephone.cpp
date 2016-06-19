@@ -8,8 +8,10 @@
 #include <cstdlib>
 using namespace std;
 
+
 /*--------- CONSTANTS ----------*/
 const int CONSTANT_COST = 25000;
+
 
 /*--------- FUNCTIONS DECLARATIONS -----------*/
 void printOutput(int min50, int min150, int min200, int cost);
