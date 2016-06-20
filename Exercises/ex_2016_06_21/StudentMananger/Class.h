@@ -3,9 +3,9 @@
 
 #include<iostream>
 #include<iomanip>
+#include<vector>
 
 #include "Student.h"
-#include "StudentList.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ class Class {
 		void printDetailInfo();
 		void printStudentInfo(int studentId);
 		
-		StudentList<Student> list;
+		vector<Student> list;
 	private:
 		int id;
 		string name;

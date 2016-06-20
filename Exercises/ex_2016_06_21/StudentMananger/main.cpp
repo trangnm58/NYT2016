@@ -5,24 +5,26 @@
  */
 
 #include<fstream>
+#include<vector>
 
 #include "Class.h"
-#include "ClassList.h"
+
+using namespace std;
 
 
 /*--------- FUNCTIONS DECLARATIONS -----------*/
-void readFromDatabase(ClassList<Class> &list, string fileName);
-void saveToDatabase(ClassList<Class> &list, string fileName);
-void insertNewClass(ClassList<Class> &list);
-void insertNewStudent(ClassList<Class> &list);
-void insertStudentMarks(ClassList<Class> &list);
-void printClassList(ClassList<Class> &list);
-void printClassInfo(ClassList<Class> &list);
-void printStudentInfo(ClassList<Class> &list);
+void readFromDatabase(vector<Class> &list, string fileName);
+void saveToDatabase(vector<Class> &list, string fileName);
+void insertNewClass(vector<Class> &list);
+void insertNewStudent(vector<Class> &list);
+void insertStudentMarks(vector<Class> &list);
+void printClassList(vector<Class> &list);
+void printClassInfo(vector<Class> &list);
+void printStudentInfo(vector<Class> &list);
 
 
 int main() {
-	ClassList<Class> list;
+	vector<Class> list;
 	int choice;
 
 	// read data from file
@@ -68,7 +70,7 @@ int main() {
 
 
 /*--------- FUNCTIONS DEFINITIONS -----------*/
-void readFromDatabase(ClassList<Class> &list, string fileName) {
+void readFromDatabase(vector<Class> &list, string fileName) {
 	ifstream inStream;
 	inStream.open(fileName.c_str());
 	
@@ -85,7 +87,7 @@ void readFromDatabase(ClassList<Class> &list, string fileName) {
 		inStream >> year;
 
 		Class c(i + 1, name, year);
-		list.append(c);
+		list.push_back(c);
 		
 		// read students data in the class
 		int numOfStudents;
@@ -102,61 +104,61 @@ void readFromDatabase(ClassList<Class> &list, string fileName) {
 			inStream >> birthday;
 			
 			Student s(j + 1, name, birthday, i + 1);
-			list.element(i).list.append(s);
+			list[i].list.push_back(s);
 			
 			// read student's marks
 			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
-			list.element(i).list.element(j).setMathMarks(testMark1, testMark2, examMark1, examMark2);
+			list[i].list[j].setMathMarks(testMark1, testMark2, examMark1, examMark2);
 			
 			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
-			list.element(i).list.element(j).setPhysicsMarks(testMark1, testMark2, examMark1, examMark2);
+			list[i].list[j].setPhysicsMarks(testMark1, testMark2, examMark1, examMark2);
 			
 			inStream >> testMark1 >> testMark2 >> examMark1 >> examMark2;
-			list.element(i).list.element(j).setChemistryMarks(testMark1, testMark2, examMark1, examMark2);
+			list[i].list[j].setChemistryMarks(testMark1, testMark2, examMark1, examMark2);
 		}
 	}
 	
 	inStream.close();
 }
 
-void saveToDatabase(ClassList<Class> &list, string fileName) {
+void saveToDatabase(vector<Class> &list, string fileName) {
 	ofstream outStream;
 	outStream.open(fileName.c_str());
 	
-	int numOfClasses = list.length();
+	int numOfClasses = list.size();
 	outStream << numOfClasses << endl;
 	
 	for (int i=0; i < numOfClasses; i++) {
-		outStream << list.element(i).getName() << endl;
-		outStream << list.element(i).getYear() << endl;
+		outStream << list[i].getName() << endl;
+		outStream << list[i].getYear() << endl;
 		
-		int numOfStudents = list.element(i).list.length();
+		int numOfStudents = list[i].list.size();
 		outStream << numOfStudents << endl;
 		for (int j=0; j < numOfStudents; j++) {
-			outStream << list.element(i).list.element(j).getName() << endl;
-			outStream << list.element(i).list.element(j).getBirthday() << endl;
+			outStream << list[i].list[j].getName() << endl;
+			outStream << list[i].list[j].getBirthday() << endl;
 			
-			outStream << list.element(i).list.element(j).getMathMarks().testMark1 << " ";
-			outStream << list.element(i).list.element(j).getMathMarks().testMark2 << " ";
-			outStream << list.element(i).list.element(j).getMathMarks().examMark1 << " ";
-			outStream << list.element(i).list.element(j).getMathMarks().examMark2 << endl;
+			outStream << list[i].list[j].getMathMarks().testMark1 << " ";
+			outStream << list[i].list[j].getMathMarks().testMark2 << " ";
+			outStream << list[i].list[j].getMathMarks().examMark1 << " ";
+			outStream << list[i].list[j].getMathMarks().examMark2 << endl;
 			
-			outStream << list.element(i).list.element(j).getPhysicsMarks().testMark1 << " ";
-			outStream << list.element(i).list.element(j).getPhysicsMarks().testMark2 << " ";
-			outStream << list.element(i).list.element(j).getPhysicsMarks().examMark1 << " ";
-			outStream << list.element(i).list.element(j).getPhysicsMarks().examMark2 << endl;
+			outStream << list[i].list[j].getPhysicsMarks().testMark1 << " ";
+			outStream << list[i].list[j].getPhysicsMarks().testMark2 << " ";
+			outStream << list[i].list[j].getPhysicsMarks().examMark1 << " ";
+			outStream << list[i].list[j].getPhysicsMarks().examMark2 << endl;
 			
-			outStream << list.element(i).list.element(j).getChemistryMarks().testMark1 << " ";
-			outStream << list.element(i).list.element(j).getChemistryMarks().testMark2 << " ";
-			outStream << list.element(i).list.element(j).getChemistryMarks().examMark1 << " ";
-			outStream << list.element(i).list.element(j).getChemistryMarks().examMark2 << endl;
+			outStream << list[i].list[j].getChemistryMarks().testMark1 << " ";
+			outStream << list[i].list[j].getChemistryMarks().testMark2 << " ";
+			outStream << list[i].list[j].getChemistryMarks().examMark1 << " ";
+			outStream << list[i].list[j].getChemistryMarks().examMark2 << endl;
 		}
 	}
 	
 	outStream.close();
 }
 
-void insertNewClass(ClassList<Class> &list) {
+void insertNewClass(vector<Class> &list) {
 	int numOfClasses;
 
 	cout << "\nNumber of classes: ";
@@ -180,18 +182,18 @@ void insertNewClass(ClassList<Class> &list) {
 			cin >> year;
 
 			Class c(i + 1, name, year);
-			list.append(c);
+			list.push_back(c);
 		}
 	}
 }
 
-void insertNewStudent(ClassList<Class> &list) {
+void insertNewStudent(vector<Class> &list) {
 	int classId;
 	
 	cout << "Class's ID: ";
 	cin >> classId;
 	
-	if (classId - 1 >= list.length()) {
+	if (classId - 1 >= list.size()) {
 		cout << "Class " << classId << " is not found!" << endl;
 	} else {
 		classId--;  // change to index
@@ -219,7 +221,7 @@ void insertNewStudent(ClassList<Class> &list) {
 				cin >> birthday;
 				
 				Student s(i + 1, name, birthday, classId + 1);
-				list.element(classId).list.append(s);
+				list[classId].list.push_back(s);
 			}
 		}
 	}
@@ -239,13 +241,13 @@ void insertMarks(int& testMark1, int& testMark2, int& examMark1, int& examMark2)
 	cin >> examMark2;
 }
 
-void insertStudentMarks(ClassList<Class> &list) {
+void insertStudentMarks(vector<Class> &list) {
 	int classId, studentId;
 
 	cout << "Class's ID: ";
 	cin >> classId;
 	
-	if (classId - 1 >= list.length()) {
+	if (classId - 1 >= list.size()) {
 		cout << "Class " << classId << " is not found!" << endl;
 	} else {
 		classId--;  // change to index
@@ -253,7 +255,7 @@ void insertStudentMarks(ClassList<Class> &list) {
 		cout << "Student's ID: ";
 		cin >> studentId;
 		
-		if (studentId - 1 >= list.element(classId).list.length()) {
+		if (studentId - 1 >= list[classId].list.size()) {
 			cout << "Student " << studentId << " is not found!" << endl;
 		} else {
 			int testMark1, testMark2, examMark1, examMark2;
@@ -263,56 +265,56 @@ void insertStudentMarks(ClassList<Class> &list) {
 			// Math
 			cout << "Math:" << endl;
 			insertMarks(testMark1, testMark2, examMark1, examMark2);
-			list.element(classId).list.element(studentId).setMathMarks(testMark1, testMark2, examMark1, examMark2);
+			list[classId].list[studentId].setMathMarks(testMark1, testMark2, examMark1, examMark2);
 			
 			// Physics
 			cout << "Physics:" << endl;
 			insertMarks(testMark1, testMark2, examMark1, examMark2);
-			list.element(classId).list.element(studentId).setPhysicsMarks(testMark1, testMark2, examMark1, examMark2);
+			list[classId].list[studentId].setPhysicsMarks(testMark1, testMark2, examMark1, examMark2);
 			
 			// Chemistry
 			cout << "Chemistry:" << endl;
 			insertMarks(testMark1, testMark2, examMark1, examMark2);
-			list.element(classId).list.element(studentId).setChemistryMarks(testMark1, testMark2, examMark1, examMark2);
+			list[classId].list[studentId].setChemistryMarks(testMark1, testMark2, examMark1, examMark2);
 		}
 	}
 }
 
-void printClassList(ClassList<Class> &list) {
+void printClassList(vector<Class> &list) {
 	const char separator = ' ';
 	
 	cout << endl << "STT ";
 	cout << left << setw(15) << setfill(separator) << "Name";
 	cout << left << setw(15) << setfill(separator) << "Year";
 	cout << "Number of Students" << endl;
-	for (int i = 0; i < list.length(); i++) {
-		list.element(i).printInfo();
+	for (int i = 0; i < list.size(); i++) {
+		list[i].printInfo();
 	}
 	cout << endl << endl;
 }
 
-void printClassInfo(ClassList<Class> &list) {
+void printClassInfo(vector<Class> &list) {
 	int classId;
 	
 	cout << "Class's ID: ";
 	cin >> classId;
 	
-	if (classId - 1 >= list.length()) {
+	if (classId - 1 >= list.size()) {
 		cout << "Class " << classId << " is not found!" << endl;
 	} else {
 		classId--;  // change to index
 		
-		list.element(classId).printDetailInfo();
+		list[classId].printDetailInfo();
 	}
 }
 
-void printStudentInfo(ClassList<Class> &list) {
+void printStudentInfo(vector<Class> &list) {
 	int classId, studentId;
 	
 	cout << "Class's ID: ";
 	cin >> classId;
 	
-	if (classId - 1 >= list.length()) {
+	if (classId - 1 >= list.size()) {
 		cout << "Class " << classId << " is not found!" << endl;
 	} else {
 		classId--;  // change to index
@@ -320,12 +322,12 @@ void printStudentInfo(ClassList<Class> &list) {
 		cout << "Student's ID: ";
 		cin >> studentId;
 		
-		if (studentId - 1 >= list.element(classId).list.length()) {
+		if (studentId - 1 >= list[classId].list.size()) {
 			cout << "Student " << studentId << " is not found!" << endl;
 		} else {
 			studentId--;  // change to index
 			
-			list.element(classId).printStudentInfo(studentId);
+			list[classId].printStudentInfo(studentId);
 		}
 	}
 }
