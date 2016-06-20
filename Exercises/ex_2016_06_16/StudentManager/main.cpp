@@ -4,18 +4,19 @@
  * Project: Student Manager
  */
 
+#include<vector>
+
 #include "Student.h"
-#include "List.h"
 
 
 /*--------- FUNCTIONS DECLARATIONS -----------*/
-void printList(List<Student> list);
-void insertStudentsInfo(List<Student> &list);
-void insertStudentMarks(List<Student> &list);
+void printList(vector<Student> list);
+void insertStudentsInfo(vector<Student> &list);
+void insertStudentMarks(vector<Student> &list);
 
 
 int main() {
-	List<Student> list;
+	vector<Student> list;
 	int choice;
 
 	while (true) {
@@ -29,7 +30,7 @@ int main() {
 		if (choice == 1) {
 			insertStudentsInfo(list);
 		} else if (choice == 2) {
-			if (list.length() == 0) {
+			if (list.size() == 0) {
 				// there is no student in the list
 				cout << "Please insert students info first!" << endl;
 			} else {
@@ -46,20 +47,20 @@ int main() {
 
 
 /*--------- FUNCTIONS DEFINITIONS -----------*/
-void printList(List<Student> list) {
+void printList(vector<Student> list) {
 	const char separator = ' ';
 	
 	cout << endl << "STT ";
 	cout << left << setw(30) << setfill(separator) << "Name";
 	cout << left << setw(15) << setfill(separator) << "Birthday";
 	cout <<"Sum\tRank" << endl;
-	for (int i = 0; i < list.length(); i++) {
-		list.element(i).printInfo();
+	for (int i = 0; i < list.size(); i++) {
+		list[i].printInfo();
 	}
 	cout << endl;
 }
 
-void insertStudentsInfo(List<Student> &list) {
+void insertStudentsInfo(vector<Student> &list) {
 	int numOfStudents;
 	
 	cout << "\nNumber of students: ";
@@ -83,19 +84,19 @@ void insertStudentsInfo(List<Student> &list) {
 			cin >> birthday;
 			
 			Student s(i + 1, name, birthday);
-			list.append(s);
+			list.push_back(s);
 		}
 	}
 }
 
-void insertStudentMarks(List<Student> &list) {
+void insertStudentMarks(vector<Student> &list) {
 	int winMark, wordMark, jiraMark;
 	int studentId;
 
 	cout << "Student's ID: ";
 	cin >> studentId;
 
-	if (studentId - 1 >= list.length()) {
+	if (studentId - 1 >= list.size()) {
 		cout << "Student " << studentId << " is not found!" << endl;
 	} else {
 		studentId--;  // change to index
@@ -109,7 +110,7 @@ void insertStudentMarks(List<Student> &list) {
 		cout << "\tJira Mark: ";
 		cin >> jiraMark;
 		
-		list.element(studentId).setMarks(winMark, wordMark, jiraMark);
+		list[studentId].setMarks(winMark, wordMark, jiraMark);
 	}
 }
 
