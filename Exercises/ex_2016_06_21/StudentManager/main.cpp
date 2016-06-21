@@ -1,17 +1,16 @@
 /**
  * Nguyen Minh Trang
- * 2016/06/21
+ * 2016/06/19
  * Project: Student Manager
  */
 
-#include<vector>
 
 #include "StudentManager.h"
 
 
 int main() {
 	StudentManager manager;
-	
+
 	while (true) {
 		manager.showMenu();
 	}

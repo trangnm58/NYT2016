@@ -1,13 +1,16 @@
 #include "Class.h"
 
+
 Class::Class()
 {
 }
+
 
 Class::Class(int id, string name, string year)
 	: id(id), name(name), year(year)
 {
 }
+
 
 void Class::printInfo()
 {
@@ -16,8 +19,9 @@ void Class::printInfo()
 	cout << id << "   ";
 	cout << left << setw(15) << setfill(separator) << name;
 	cout << left << setw(15) << setfill(separator) << year;
-	cout << list.size() << endl;
+	cout << studentList.size() << endl;
 }
+
 
 void Class::printDetailInfo()
 {
@@ -32,11 +36,12 @@ void Class::printDetailInfo()
 	cout << left << setw(6) << setfill(separator) << "Math";
 	cout << left << setw(9) << setfill(separator) << "Physics";
 	cout << "Chemistry" << endl;
-	for (int i = 0; i < list.size(); i++) {
-		list[i].printInfo();
+	for (int i = 0; i < studentList.size(); i++) {
+		studentList[i].printInfo();
 	}
 	cout << endl << endl;
 }
+
 
 void Class::printStudentInfo(int studentId) {
 	const char separator = ' ';
@@ -51,7 +56,7 @@ void Class::printStudentInfo(int studentId) {
 	cout << left << setw(9) << setfill(separator) << "Physics";
 	cout << "Chemistry" << endl;
 	
-	list[studentId].printInfo();
+	studentList[studentId].printInfo();
 	cout << endl << endl;
 }
 

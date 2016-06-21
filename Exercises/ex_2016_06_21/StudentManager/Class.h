@@ -22,7 +22,7 @@ class Class {
 		void printDetailInfo();
 		void printStudentInfo(int studentId);
 		
-		vector<Student> list;
+		vector<Student> studentList;
 	private:
 		int id;
 		string name;

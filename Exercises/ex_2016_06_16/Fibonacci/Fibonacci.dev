@@ -1,6 +1,6 @@
 [Project]
-FileName=StudentManager.dev
-Name=StudentManager
+FileName=Fibonacci.dev
+Name=Fibonacci
 Type=1
 Ver=2
 ObjFiles=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=5
+UnitCount=3
 
 [VersionInfo]
 Major=1
@@ -60,18 +60,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit3]
-FileName=Student.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit2]
-FileName=Student.h
+FileName=Fibonacci.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -80,28 +70,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit6]
-FileName=C:\Users\Page\Desktop\test.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit4]
-FileName=StudentManager.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit5]
-FileName=StudentManager.cpp
+[Unit3]
+FileName=Fibonacci.cpp
 CompileCpp=1
 Folder=
 Compile=1
