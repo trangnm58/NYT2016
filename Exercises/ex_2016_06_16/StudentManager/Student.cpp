@@ -11,7 +11,7 @@ Student::Student(int id, string name, string birthday)
 	this->rank = "Unranked";
 }
 
-void Student::setMarks(int winMark, int wordMark, int jiraMark)
+void Student::setMarks(int winMark = 0, int wordMark = 0, int jiraMark = 0)
 {
 	winMark >= 0 ? this->winMark = winMark : this->winMark = 0;
 	wordMark >= 0 ? this->wordMark = wordMark : this->wordMark = 0;
@@ -21,9 +21,9 @@ void Student::setMarks(int winMark, int wordMark, int jiraMark)
 	sum = this->winMark + this->wordMark + this->jiraMark;
 	
 	// calculate the rank
-	if (sum >= 24) {
+	if (sum >= MIN_EXELLENCE_SCORE) {
 		rank = "Exellence";
-	} else if (sum < 24 && sum >= 18) {
+	} else if (sum < MIN_EXELLENCE_SCORE && sum >= MIN_GOOD_SCORE) {
 		rank = "Good";
 	} else {
 		rank = "Average";

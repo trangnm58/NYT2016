@@ -3,7 +3,12 @@
 
 #include<iostream>
 #include<iomanip>
+
 using namespace std;
+
+
+const int MIN_EXELLENCE_SCORE = 24;
+const int MIN_GOOD_SCORE = 18;
 
 
 class Student {

@@ -87,38 +87,34 @@ void NumberSolver::findMostFrequent()
 
 void NumberSolver::insertionSortASC()
 {
-	if (numbers.size() > 0) {
-		for (int i = 1; i < numbers.size(); i++) {
-			int pos = i - 1;
-			while (pos >= 0 && numbers[pos] > numbers[i]) {
-				pos--;
-			}
-			pos++;
-			int temp = numbers[i];
-			for (int j = i - 1; j >= pos; j--) {
-				numbers[j+1] = numbers[j];
-			}
-			numbers[pos] = temp;
+	for (int i = 1; i < numbers.size(); i++) {
+		int pos = i - 1;
+		while (pos >= 0 && numbers[pos] > numbers[i]) {
+			pos--;
 		}
+		pos++;
+		int temp = numbers[i];
+		for (int j = i - 1; j >= pos; j--) {
+			numbers[j+1] = numbers[j];
+		}
+		numbers[pos] = temp;
 	}
 }
 
 
 void NumberSolver::insertionSortDESC()
 {
-	if (numbers.size() > 0) {
-		for (int i = 1; i < numbers.size(); i++) {
-			int pos = i - 1;
-			while (pos >= 0 && numbers[pos] < numbers[i]) {
-				pos--;
-			}
-			pos++;
-			int temp = numbers[i];
-			for (int j = i - 1; j >= pos; j--) {
-				numbers[j+1] = numbers[j];
-			}
-			numbers[pos] = temp;
+	for (int i = 1; i < numbers.size(); i++) {
+		int pos = i - 1;
+		while (pos >= 0 && numbers[pos] < numbers[i]) {
+			pos--;
 		}
+		pos++;
+		int temp = numbers[i];
+		for (int j = i - 1; j >= pos; j--) {
+			numbers[j+1] = numbers[j];
+		}
+		numbers[pos] = temp;
 	}
 }
 
